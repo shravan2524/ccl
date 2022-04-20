@@ -45,10 +45,6 @@ db.once('open', function () {
 });
 
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-  res.send(`Hit home page. Received the unique id: ${uniqueId}\n`)
-});
 
 app.post('/success', (req, err) => {
   let { items } = req.body
@@ -284,6 +280,12 @@ app.post('/slot', (req, res) => {
     })
     .catch(err => console.log(err));
 });
+
+// app.get('/', (req, res) => {
+//   res.send('Hello World!');
+//   res.send(`Hit home page. Received the unique id: ${uniqueId}\n`)
+// });
+
 
 if (process.env.NODE_ENV == "production") {
   app.use(express.static("client/build"));
