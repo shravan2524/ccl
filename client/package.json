@@ -18,6 +18,7 @@
     "date-and-time": "^1.0.1",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
+    "firebase": "^9.6.11",
     "get-current-date": "^1.0.1",
     "jquery": "^3.6.0",
     "moment-timezone": "^0.5.33",

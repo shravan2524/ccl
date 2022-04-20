@@ -2,6 +2,8 @@ import React from 'react';
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from 'axios';
+import { useAuth } from '../../../AuthContext';
+
 
 export const Form = React.createContext();
 const Signup = () => {
@@ -12,9 +14,11 @@ const Signup = () => {
         setUser(prevUser => ({ ...prevUser, [e.target.name]: e.target.value }));
     }
     const [items, setItems] = useState([]);
+    const { signUp } = useAuth();
+
  
   // handle click event of the button to add item
-  const submit = (e) => {
+  const submit = async (e) => {
       e.preventDefault();
     setItems(prevItems => [...prevItems, {
       id: prevItems.length,
@@ -27,7 +31,10 @@ const Signup = () => {
     }]);
       
       console.log(user);
-    
+
+
+    await signUp(user.email, user.password);
+
     axios.post('http://localhost:8000/success', { items : user})
     .then(res => { 
             console.log(res);

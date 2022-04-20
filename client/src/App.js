@@ -18,31 +18,36 @@ import Test from './components/base/Test';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import Logout from './components/base/Logout';
+import { AuthProvider } from './AuthContext';
+
 function App() {
   return (
     <div>
-      <Router>
-        <Header />
-        <Logout />
-        <Switch>
-          <Route exact path="/">
-            <Login />
-          </Route>
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
-          <Route exact path="/dashboard">
-            <Dashboard />
-          </Route>
-          <Route exact path="/doctordashboard">
-            <Doctordashboard />
-          </Route>
-          <Route exact path="/dashboard/bookappointment">
-            <BookAppointment />
-          </Route>
-        </Switch>
+      <AuthProvider>
 
-      </Router>
+        <Router>
+          <Header />
+          <Logout />
+          <Switch>
+            <Route exact path="/">
+              <Login />
+            </Route>
+            <Route exact path="/signup">
+              <Signup />
+            </Route>
+            <Route exact path="/dashboard">
+              <Dashboard />
+            </Route>
+            <Route exact path="/doctordashboard">
+              <Doctordashboard />
+            </Route>
+            <Route exact path="/dashboard/bookappointment">
+              <BookAppointment />
+            </Route>
+          </Switch>
+
+        </Router>
+      </AuthProvider>
     </div>
   );
 }
