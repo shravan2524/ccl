@@ -16,8 +16,10 @@ var session = require('express-session');
 var path = require('path');
 var sessionStorage = require('sessionstorage');
 const PORT = process.env.PORT || 8000;
-// const PORT = 8000;
 //session
+
+// app.use(bodyParser.json());
+app.use(express.static("client/build/"));
 app.use(session({
   genid: (req) => {
     console.log('Inside the session middleware')
@@ -45,6 +47,10 @@ db.once('open', function () {
 });
 
 
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+  res.send(`Hit home page. Received the unique id: ${uniqueId}\n`)
+});
 
 app.post('/success', (req, err) => {
   let { items } = req.body
@@ -281,11 +287,9 @@ app.post('/slot', (req, res) => {
     .catch(err => console.log(err));
 });
 
-// app.get('/', (req, res) => {
-//   res.send('Hello World!');
-//   res.send(`Hit home page. Received the unique id: ${uniqueId}\n`)
-// });
-
+// if (process.env.NODE_ENV == "production") {
+//   app.use(express.static("client/build"));
+// }
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "client", "build",     
